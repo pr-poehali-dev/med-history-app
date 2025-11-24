@@ -29,6 +29,9 @@ interface MedicalHistory {
   type: string;
   description: string;
   doctor: string;
+  specialty: string;
+  clinic: string;
+  department: string;
 }
 
 interface Heredity {
@@ -68,9 +71,11 @@ function Index() {
   ];
 
   const medicalHistory: MedicalHistory[] = [
-    { date: '20.11.2024', type: 'Осмотр', description: 'Артериальное давление 140/90. Назначен Эналаприл 10мг', doctor: 'Др. Соколова' },
-    { date: '15.10.2024', type: 'Анализы', description: 'ОАК: Hb 135 г/л, Лейкоциты 6.2', doctor: 'Др. Соколова' },
-    { date: '01.09.2024', type: 'Консультация', description: 'Жалобы на головные боли. ЭКГ без патологии', doctor: 'Др. Соколова' },
+    { date: '20.11.2024', type: 'Осмотр', description: 'Артериальное давление 140/90. Назначен Эналаприл 10мг', doctor: 'Др. Соколова Е.И.', specialty: 'Терапевт', clinic: 'Городская поликлиника №7', department: 'Кардиология' },
+    { date: '15.10.2024', type: 'Анализы', description: 'ОАК: Hb 135 г/л, Лейкоциты 6.2', doctor: 'Др. Петров А.М.', specialty: 'Лаборант', clinic: 'Диагностический центр "Здоровье"', department: 'Клиническая лаборатория' },
+    { date: '01.09.2024', type: 'Консультация', description: 'Жалобы на головные боли. ЭКГ без патологии', doctor: 'Др. Иванова М.С.', specialty: 'Невролог', clinic: 'Медицинский центр "Энергия"', department: 'Неврология' },
+    { date: '15.08.2024', type: 'Обследование', description: 'УЗИ щитовидной железы. Без патологий', doctor: 'Др. Кузнецов В.П.', specialty: 'Эндокринолог', clinic: 'Городская поликлиника №7', department: 'Эндокринология' },
+    { date: '10.07.2024', type: 'Осмотр', description: 'Контроль зрения. Острота зрения 1.0/1.0', doctor: 'Др. Орлова Н.А.', specialty: 'Офтальмолог', clinic: 'Офтальмологический центр "Взгляд"', department: 'Офтальмология' },
   ];
 
   const heredity: Heredity[] = [
@@ -250,15 +255,26 @@ function Index() {
                       <CardContent>
                         <div className="space-y-4">
                           {medicalHistory.map((record, index) => (
-                            <div key={index} className="relative pl-6 pb-4 border-l-2 border-primary last:border-l-0 last:pb-0">
+                            <div key={index} className="relative pl-6 pb-6 border-l-2 border-primary last:border-l-0 last:pb-0">
                               <div className="absolute left-[-9px] top-0 w-4 h-4 rounded-full bg-primary border-4 border-white" />
-                              <div className="space-y-1">
-                                <div className="flex items-center gap-2 mb-1">
+                              <div className="space-y-2">
+                                <div className="flex items-center gap-2 mb-2">
                                   <Badge variant="outline" className="text-xs">{record.type}</Badge>
                                   <span className="text-xs text-gray-500">{record.date}</span>
                                 </div>
-                                <p className="text-sm text-gray-700">{record.description}</p>
-                                <p className="text-xs text-gray-500">{record.doctor}</p>
+                                <p className="text-sm text-gray-700 font-medium">{record.description}</p>
+                                <div className="grid grid-cols-2 gap-2 mt-3 p-3 bg-gray-50 rounded-lg">
+                                  <div>
+                                    <p className="text-xs text-gray-500 mb-1">Врач</p>
+                                    <p className="text-sm font-medium">{record.doctor}</p>
+                                    <p className="text-xs text-primary">{record.specialty}</p>
+                                  </div>
+                                  <div>
+                                    <p className="text-xs text-gray-500 mb-1">Клиника</p>
+                                    <p className="text-sm font-medium">{record.clinic}</p>
+                                    <p className="text-xs text-gray-600">{record.department}</p>
+                                  </div>
+                                </div>
                               </div>
                             </div>
                           ))}
