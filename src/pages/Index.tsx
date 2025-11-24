@@ -115,7 +115,7 @@ function Index() {
               <Icon name="Activity" className="text-white" size={24} />
             </div>
             <div>
-              <h1 className="font-bold text-lg">MediCare</h1>
+              <h1 className="font-bold text-lg">BIOLink</h1>
               <p className="text-xs text-gray-500">Врачебная система</p>
             </div>
           </div>
