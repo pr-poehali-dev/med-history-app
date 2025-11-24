@@ -32,6 +32,9 @@ interface MedicalHistory {
   specialty: string;
   clinic: string;
   department: string;
+  complaints: string;
+  condition: string;
+  recommendations: string;
 }
 
 interface Heredity {
@@ -71,11 +74,66 @@ function Index() {
   ];
 
   const medicalHistory: MedicalHistory[] = [
-    { date: '20.11.2024', type: 'Осмотр', description: 'Артериальное давление 140/90. Назначен Эналаприл 10мг', doctor: 'Др. Соколова Е.И.', specialty: 'Терапевт', clinic: 'Городская поликлиника №7', department: 'Кардиология' },
-    { date: '15.10.2024', type: 'Анализы', description: 'ОАК: Hb 135 г/л, Лейкоциты 6.2', doctor: 'Др. Петров А.М.', specialty: 'Лаборант', clinic: 'Диагностический центр "Здоровье"', department: 'Клиническая лаборатория' },
-    { date: '01.09.2024', type: 'Консультация', description: 'Жалобы на головные боли. ЭКГ без патологии', doctor: 'Др. Иванова М.С.', specialty: 'Невролог', clinic: 'Медицинский центр "Энергия"', department: 'Неврология' },
-    { date: '15.08.2024', type: 'Обследование', description: 'УЗИ щитовидной железы. Без патологий', doctor: 'Др. Кузнецов В.П.', specialty: 'Эндокринолог', clinic: 'Городская поликлиника №7', department: 'Эндокринология' },
-    { date: '10.07.2024', type: 'Осмотр', description: 'Контроль зрения. Острота зрения 1.0/1.0', doctor: 'Др. Орлова Н.А.', specialty: 'Офтальмолог', clinic: 'Офтальмологический центр "Взгляд"', department: 'Офтальмология' },
+    { 
+      date: '20.11.2024', 
+      type: 'Осмотр', 
+      description: 'Артериальное давление 140/90. Назначен Эналаприл 10мг', 
+      doctor: 'Др. Соколова Е.И.', 
+      specialty: 'Терапевт', 
+      clinic: 'Городская поликлиника №7', 
+      department: 'Кардиология',
+      complaints: 'Головные боли, шум в ушах, общая слабость',
+      condition: 'Состояние удовлетворительное. Повышенное АД. Пульс 80 уд/мин, ритмичный',
+      recommendations: 'Прием Эналаприла 10мг 1 раз в день утром. Контроль АД ежедневно. Повторный прием через 2 недели'
+    },
+    { 
+      date: '15.10.2024', 
+      type: 'Анализы', 
+      description: 'ОАК: Hb 135 г/л, Лейкоциты 6.2', 
+      doctor: 'Др. Петров А.М.', 
+      specialty: 'Лаборант', 
+      clinic: 'Диагностический центр "Здоровье"', 
+      department: 'Клиническая лаборатория',
+      complaints: 'Направлен терапевтом для планового обследования',
+      condition: 'Все показатели в пределах нормы',
+      recommendations: 'Повторить анализы через 3 месяца'
+    },
+    { 
+      date: '01.09.2024', 
+      type: 'Консультация', 
+      description: 'Жалобы на головные боли. ЭКГ без патологии', 
+      doctor: 'Др. Иванова М.С.', 
+      specialty: 'Невролог', 
+      clinic: 'Медицинский центр "Энергия"', 
+      department: 'Неврология',
+      complaints: 'Частые головные боли в височной области, головокружение',
+      condition: 'Состояние удовлетворительное. Неврологический статус без особенностей',
+      recommendations: 'Назначен МРТ головного мозга. Прием магния в таблетках. Повторное обращение с результатами МРТ'
+    },
+    { 
+      date: '15.08.2024', 
+      type: 'Обследование', 
+      description: 'УЗИ щитовидной железы. Без патологий', 
+      doctor: 'Др. Кузнецов В.П.', 
+      specialty: 'Эндокринолог', 
+      clinic: 'Городская поликлиника №7', 
+      department: 'Эндокринология',
+      complaints: 'Утомляемость, снижение веса',
+      condition: 'Щитовидная железа не увеличена. Узловые образования не обнаружены',
+      recommendations: 'Контроль гормонов щитовидной железы 1 раз в год. Повторное УЗИ через 12 месяцев'
+    },
+    { 
+      date: '10.07.2024', 
+      type: 'Осмотр', 
+      description: 'Контроль зрения. Острота зрения 1.0/1.0', 
+      doctor: 'Др. Орлова Н.А.', 
+      specialty: 'Офтальмолог', 
+      clinic: 'Офтальмологический центр "Взгляд"', 
+      department: 'Офтальмология',
+      complaints: 'Плановый осмотр, жалоб нет',
+      condition: 'Зрение нормальное, глазное дно без патологий',
+      recommendations: 'Повторный осмотр через 1 год'
+    },
   ];
 
   const heredity: Heredity[] = [
@@ -262,7 +320,23 @@ function Index() {
                                   <Badge variant="outline" className="text-xs">{record.type}</Badge>
                                   <span className="text-xs text-gray-500">{record.date}</span>
                                 </div>
-                                <p className="text-sm text-gray-700 font-medium">{record.description}</p>
+                                <div className="mb-3 p-3 bg-blue-50 border-l-4 border-blue-500 rounded">
+                                  <p className="text-xs text-blue-700 font-semibold mb-1">Жалобы пациента</p>
+                                  <p className="text-sm text-gray-700">{record.complaints}</p>
+                                </div>
+                                
+                                <div className="mb-3 p-3 bg-green-50 border-l-4 border-green-500 rounded">
+                                  <p className="text-xs text-green-700 font-semibold mb-1">Состояние</p>
+                                  <p className="text-sm text-gray-700">{record.condition}</p>
+                                </div>
+
+                                <p className="text-sm text-gray-700 font-medium mb-3">{record.description}</p>
+                                
+                                <div className="p-3 bg-purple-50 border-l-4 border-purple-500 rounded mb-3">
+                                  <p className="text-xs text-purple-700 font-semibold mb-1">Рекомендации врача</p>
+                                  <p className="text-sm text-gray-700">{record.recommendations}</p>
+                                </div>
+
                                 <div className="grid grid-cols-2 gap-2 mt-3 p-3 bg-gray-50 rounded-lg">
                                   <div>
                                     <p className="text-xs text-gray-500 mb-1">Врач</p>
